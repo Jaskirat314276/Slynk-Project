@@ -12,6 +12,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Star, CheckCircle, BookOpen, Clock } from "lucide-react";
 
+interface ReviewType {
+  id: number;
+  rating: number;
+  content: string;
+  author: string;
+  date: string;
+  avatar: string;
+}
+
 const CourseDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   
@@ -32,7 +41,7 @@ const CourseDetailsPage = () => {
     image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d",
     price: 29.99,
     rating: 4.8,
-    reviews: 124,
+    reviewCount: 124,
     author: {
       name: "Emily Chen",
       avatar: "https://i.pravatar.cc/150?img=1",
@@ -72,7 +81,7 @@ const CourseDetailsPage = () => {
         category: "Biology",
       },
     ],
-    reviews: [
+    courseReviews: [
       {
         id: 1,
         rating: 5,
@@ -114,7 +123,7 @@ const CourseDetailsPage = () => {
               <div className="flex items-center mr-4">
                 <Star className="h-4 w-4 text-amber-500 fill-current mr-1" />
                 <span className="font-medium">{course.rating}</span>
-                <span className="ml-1">({course.reviews} reviews)</span>
+                <span className="ml-1">({course.reviewCount} reviews)</span>
               </div>
               <div className="flex items-center mr-4">
                 <BookOpen className="h-4 w-4 mr-1" />
@@ -233,13 +242,13 @@ const CourseDetailsPage = () => {
                           ))}
                       </div>
                       <p className="text-gray-600 text-sm">
-                        Based on {course.reviews} reviews
+                        Based on {course.reviewCount} reviews
                       </p>
                     </div>
                   </div>
                   
                   <div className="space-y-6">
-                    {course.reviews.map((review) => (
+                    {course.courseReviews.map((review) => (
                       <div key={review.id} className="border-b pb-6">
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex items-center">
